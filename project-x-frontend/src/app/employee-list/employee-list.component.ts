@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgForOf} from '@angular/common';
+import {DatePipe, NgForOf} from '@angular/common';
 import {Employee} from '../employee';
 import {EmployeeService} from '../services/employee.service';
 import {Router} from '@angular/router';
@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
   selector: 'app-employee-list',
   imports: [
     NgForOf,
+    DatePipe,
   ],
   templateUrl: './employee-list.component.html',
   styleUrl: './employee-list.component.css'

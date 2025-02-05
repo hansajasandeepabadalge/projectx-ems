@@ -1,7 +1,7 @@
 import { Injectable, Injector } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {Employee} from '../employee';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Employee } from '../employee';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,6 @@ export class EmployeeService {
   constructor(public injector: Injector) {
     this.httpclient = this.injector.get(HttpClient);
   }
-
 
   getEmployeesList(): Observable<Employee[]> {
     return this.httpclient.get<Employee[]>(`${this.baseURL}`);
@@ -35,5 +34,17 @@ export class EmployeeService {
     return this.httpclient.delete(`${this.baseURL}/${id}`);
   }
 
+  uploadEmployeePhoto(id: number, file: File): Observable<string> {
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
 
+    return this.httpclient.post(`${this.baseURL}/${id}/uploadPhoto`, formData, { responseType: 'text' });
+  }
+
+
+  getEmployeePhoto(id: number): Observable<Blob> {
+    return this.httpclient.get(`${this.baseURL}/${id}/photo`, {
+      responseType: 'blob',
+    });
+  }
 }

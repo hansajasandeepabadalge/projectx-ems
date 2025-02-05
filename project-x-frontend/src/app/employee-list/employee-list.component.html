@@ -4,13 +4,20 @@
   <tr>
     <th>First Name</th>
     <th>Last Name</th>
+    <th>Date of Birth</th>
+    <th>Gender</th>
+    <th>Phone No</th>
     <th>Email</th>
+    <th>Update/Delete </th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor = "let employee of employees">
     <td>{{ employee.firstName }}</td>
     <td>{{ employee.lastName }}</td>
+    <td>{{ employee.dob | date:'yyyy-MM-dd'}}</td>
+    <td>{{ employee.gender }}</td>
+    <td>{{ employee.phoneNo }}</td>
     <td>{{ employee.emailId }}</td>
     <td>
       <button (click)="updateEmployee(employee.id)" class="btn btn-info text-white">Update</button>
