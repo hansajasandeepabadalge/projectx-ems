@@ -24,7 +24,6 @@ export class CreateEmployeeComponent implements OnInit{
 
   }
 
-
   ngOnInit(): void {
 
   }
@@ -46,10 +45,8 @@ export class CreateEmployeeComponent implements OnInit{
     this.employeeService.createEmployee(this.employee).subscribe(data => {
         console.log('Employee created:', data);
 
-        // @ts-ignore - Get the newly created employee's ID (Assuming backend returns created employee)
-        const employeeId = data.id;
-        // Upload photo if a file is selected
-        if (this.selectedFile) {
+        // @ts-ignore
+        const employeeId = data.id;if (this.selectedFile) {
           this.uploadPhoto(employeeId);
 
         } else {
@@ -61,6 +58,12 @@ export class CreateEmployeeComponent implements OnInit{
   }
   uploadPhoto(employeeId: number) {
     if (this.selectedFile) {
+      const allowedTypes = ['image/png', 'image/jpeg'];
+
+      if (!allowedTypes.includes(this.selectedFile.type)) {
+        alert('Invalid file. only JPG and PNG are allowed')
+        return;
+      }
       this.employeeService.uploadEmployeePhoto(employeeId, this.selectedFile).subscribe(response => {
           console.log('Photo uploaded:', response);
           this.goToEmployeeList();
@@ -76,8 +79,16 @@ export class CreateEmployeeComponent implements OnInit{
     this.router.navigate(['/employee']);
   }
 
+
+
   onSubmit() {
-    console.log(this.employee);
-    this.saveEmployee();
+    if (this.selectedFile) {
+      const allowedTypes = ['image/png', 'image/jpeg'];
+      if (!allowedTypes.includes(this.selectedFile.type)) {
+        alert('Invalid file. only JPG and PNG are allowed')
+      } else {
+        this.saveEmployee();
+      }
+    }
   }
 }

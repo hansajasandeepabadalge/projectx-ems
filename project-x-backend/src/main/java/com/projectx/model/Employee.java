@@ -1,5 +1,6 @@
 package com.projectx.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -18,6 +19,7 @@ public class Employee {
     @Column(name = "last_name")
     private String lastName;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "dob")
     private Date dob;
 

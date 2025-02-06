@@ -3,13 +3,15 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {EmployeeService} from '../services/employee.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Employee} from '../employee';
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-update-employee',
-  imports: [
-    FormsModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        DatePipe
+    ],
   templateUrl: './update-employee.component.html',
   styleUrl: './update-employee.component.css'
 })
